@@ -167,13 +167,31 @@ public class TimeTest {
      */
     @Test
     public void format() {
-        String specifyDate = "20151011";
-        DateTimeFormatter formatter = DateTimeFormatter.BASIC_ISO_DATE;
-        LocalDate formatted = LocalDate.parse(specifyDate,formatter);
-        System.out.println(formatted);
-
-        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("YYYY MM dd");
-        System.out.println(formatter2.format(LocalDate.now()));
+//        String specifyDate = "20151011";
+//        DateTimeFormatter formatter = DateTimeFormatter.BASIC_ISO_DATE;
+//        LocalDate formatted = LocalDate.parse(specifyDate,formatter);
+//        System.out.println(formatted);
+//
+//        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("YYYY MM dd");
+//        System.out.println(formatter2.format(LocalDate.now()));
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatter3 = DateTimeFormatter.ofPattern("HH:mm:ss");
+//格式化
+        String format = now.format(formatter);
+        String format2 = now.format(formatter2);
+        String format3 = now.format(formatter3);
+        System.out.println("格式化1:" + format);
+        System.out.println("格式化2:" + format2);
+        System.out.println("格式化3:" + format3);
+//解析
+        LocalDateTime localDateTime = LocalDateTime.parse(format, formatter);
+        LocalDate localDate = LocalDate.parse(format2, formatter2);
+        LocalTime localTime = LocalTime.parse(format3, formatter3);
+        System.out.println("解析1:" + localDateTime);
+        System.out.println("解析2:" + localDate);
+        System.out.println("解析3:" + localTime);
     }
 
     /**
