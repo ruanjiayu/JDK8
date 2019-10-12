@@ -58,6 +58,21 @@ public class TimeTest {
 
     }
 
+    /**
+     * 获取指定的时间
+     */
+    @Test
+    public void gainAppointedTime() {
+        LocalDateTime now = LocalDateTime.now();
+        System.out.println("年:"+now.getYear());
+        System.out.println("月:"+now.getMonthValue());
+        System.out.println("日:"+now.getDayOfMonth());
+        System.out.println("时:"+now.getHour());
+        System.out.println("分:"+now.getMinute());
+        System.out.println("秒:"+now.getSecond());
+        System.out.println("该日期是该年的第"+now.getDayOfYear()+"天");
+    }
+
 
     /**
      * 对时间进行操作
