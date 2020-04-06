@@ -1,5 +1,7 @@
 package com.xian.jdk.bo;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -18,6 +20,19 @@ public class Student {
     private String address;
 
     public Student() {
+    }
+
+    private static Student s1 = new Student(1L, "肖战", 15, "浙江");
+    private static Student s2 = new Student(2L, "王一博", 15, "湖北");
+    private static Student s3 = new Student(3L, "杨紫", 17, "北京");
+    private static Student s4 = new Student(4L, "李现", 17, "浙江");
+
+    /**
+     * 来获取student的集合数据
+     * @return
+     */
+    public static List<Student> findStudents() {
+        return Arrays.asList(s1, s2, s3, s4);
     }
 
     public Student(Long id, String name, int age, String address) {
