@@ -17,7 +17,7 @@ import java.util.Date;
 public class TimeTest {
 
     /**
-     * Instant：时间戳 不是东八区的司机拿
+     * Instant：时间戳 不是东八区的时间
      * Duration：持续时间，时间差
      * LocalDate：只包含日期，比如：2016-10-20
      * LocalTime：只包含时间，比如：23:12:10
