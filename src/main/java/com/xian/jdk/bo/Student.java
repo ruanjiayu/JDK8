@@ -35,6 +35,13 @@ public class Student {
         return Arrays.asList(s1, s2, s3, s4);
     }
 
+
+    public static Student createStudent() {
+        System.out.println("创建一个学生");
+        Student s5 = new Student(5L, "阮佳裕", 26, "浙江");
+        return s5;
+    }
+
     public Student(Long id, String name, int age, String address) {
         this.id = id;
         this.name = name;
