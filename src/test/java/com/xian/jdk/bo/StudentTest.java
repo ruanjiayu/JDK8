@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.IntSummaryStatistics;
 import java.util.List;
+import java.util.Optional;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -95,6 +96,7 @@ public class StudentTest {
     public void sortBaseTest() {
         List<String> list = Arrays.asList("2", "3", "1", "2", "5", "4");
         list.stream().sorted().forEach(System.out::println);
+        list.stream().sorted(Comparator.reverseOrder()).forEach(System.out::println);
     }
 
     /**
