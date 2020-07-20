@@ -19,6 +19,8 @@ public class Student {
 
     private String address;
 
+    private String distance;
+
     public Student() {
     }
 
@@ -47,6 +49,15 @@ public class Student {
         this.name = name;
         this.age = age;
         this.address = address;
+        this.distance = String.valueOf(age);
+    }
+
+    public Student(Long id, String name, int age, String address, String distance) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.address = address;
+        this.distance = distance;
     }
 
     @Override
@@ -56,8 +67,10 @@ public class Student {
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 ", address='" + address + '\'' +
+                ", distance='" + distance + '\'' +
                 '}';
     }
+
 
     /**
      * 为了实现对象级别的判断是否相同
@@ -120,5 +133,13 @@ public class Student {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getDistance() {
+        return distance;
+    }
+
+    public void setDistance(String distance) {
+        this.distance = distance;
     }
 }

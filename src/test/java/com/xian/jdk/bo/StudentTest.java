@@ -2,6 +2,7 @@ package com.xian.jdk.bo;
 
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -106,10 +107,10 @@ public class StudentTest {
      */
     @Test
     public void sortObjectTest() {
-        Student s1 = new Student(1L, "肖战", 17, "浙江");
-        Student s2 = new Student(1L, "王一博", 16, "湖北");
-        Student s3 = new Student(4L, "杨紫", 17, "北京");
-        Student s4 = new Student(3L, "李现", 17, "浙江");
+        Student s1 = new Student(1L, "肖战", 7, "浙江", "7.0");
+        Student s2 = new Student(1L, "王一博", 3, "湖北", "3.0");
+        Student s3 = new Student(4L, "杨紫", 13, "北京", "13.0");
+        Student s4 = new Student(3L, "李现", 27, "浙江", "27.0");
         List<Student> students = new ArrayList<>();
         students.add(s1);
         students.add(s2);
@@ -124,6 +125,11 @@ public class StudentTest {
 //                .sorted((stu1, stu2) -> Long.compare(stu2.getId(), stu1.getId())) 逆序排序
                 .sorted(Comparator.comparingLong(Student::getId).reversed())
                 .sorted(Comparator.comparingInt(Student::getAge))
+                .sorted(Comparator.comparing(stu -> new BigDecimal(stu.getDistance())))
+                .map(s -> {
+                    s.setAddress("地址" + s.getAddress());
+                return s;}).collect(Collectors.toList())
+//                .sorted(Comparator.comparingInt(Student::getAge))
                 .forEach(System.out::println);
     }
 
@@ -167,7 +173,7 @@ public class StudentTest {
     }
 
     /**
-     * 找到最大值的对象
+     * 找到最大值的对象F
      */
     @Test
     public void maxTest() {
