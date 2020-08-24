@@ -223,4 +223,16 @@ public class TimeTest {
         Date date4 = Date.from(instant);
         System.out.println("【LocalDate -> Date】:" + date4);
     }
+
+
+    /**
+     * 构建时间
+     */
+    @Test
+    public void buildTest() {
+        LocalDate localDate = LocalDate.now();
+        LocalTime time = LocalTime.of(8, 0, 0);
+        LocalDateTime localDateTime = LocalDateTime.of(localDate, time);
+        System.out.println(localDateTime);
+    }
 }
