@@ -123,9 +123,8 @@ public class StudentTest {
 //        students.stream().sorted(Comparator.comparingLong(Student::getId)).forEach(System.out::println);
         students.stream()
 //                .sorted((stu1, stu2) -> Long.compare(stu2.getId(), stu1.getId())) 逆序排序
-                .sorted(Comparator.comparingLong(Student::getId).reversed())
-                .sorted(Comparator.comparingInt(Student::getAge))
-                .sorted(Comparator.comparing(stu -> new BigDecimal(stu.getDistance())))
+                .sorted(Comparator.comparingLong(Student::getId).reversed().thenComparingInt(Student::getAge))
+//                .sorted(Comparator.comparing(stu -> new BigDecimal(stu.getDistance())))
                 .map(s -> {
                     s.setAddress("地址" + s.getAddress());
                 return s;}).collect(Collectors.toList())
