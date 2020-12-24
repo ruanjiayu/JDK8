@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -16,17 +15,14 @@ import java.util.concurrent.TimeUnit;
  * @Version: 0.0.1-SNAPSHOT
  */
 public class ThreadLocalUsage04 {
-    public static ExecutorService THREAD_POOL = new ThreadPoolExecutor(10, 15, 300, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(1024), Executors.defaultThreadFactory(), new ThreadPoolExecutor.DiscardPolicy());
+    public static ExecutorService THREAD_POOL = new ThreadPoolExecutor(10, 15, 300, TimeUnit.SECONDS, new ArrayBlockingQueue<>(1024), Executors.defaultThreadFactory(), new ThreadPoolExecutor.DiscardPolicy());
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         for (int i = 0; i < 1000; i++) {
             int finalI = i;
-            THREAD_POOL.submit(new Runnable() {
-                @Override
-                public void run() {
-                    String date = new ThreadLocalUsage04().date(finalI);
-                    System.out.println(date);
-                }
+            THREAD_POOL.submit(() -> {
+                String date = new ThreadLocalUsage04().date(finalI);
+                System.out.println(date);
             });
         }
         THREAD_POOL.shutdown();
@@ -39,14 +35,10 @@ public class ThreadLocalUsage04 {
         return simpleDateFormat.format(date);
     }
 
+    public static  class   ThreadSafeDateFormatter {
+
+        public static ThreadLocal<SimpleDateFormat> dateFormatThreadLocal = ThreadLocal.withInitial(() -> new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+    }
+
 }
 
-class ThreadSafeDateFormatter {
-
-    public static ThreadLocal<SimpleDateFormat> dateFormatThreadLocal = new ThreadLocal<SimpleDateFormat>() {
-        @Override
-        protected SimpleDateFormat initialValue() {
-            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        }
-    };
-}

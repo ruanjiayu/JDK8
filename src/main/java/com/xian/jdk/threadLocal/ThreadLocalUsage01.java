@@ -11,20 +11,14 @@ import java.util.Date;
  */
 public class ThreadLocalUsage01 {
     public static void main(String[] args) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String date = new ThreadLocalUsage01().date(10);
-                System.out.println(date);
-            }
+        new Thread(() -> {
+            String date = new ThreadLocalUsage01().date(10);
+            System.out.println(date);
         }).start();
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String date = new ThreadLocalUsage01().date(1000);
-                System.out.println(date);
-            }
+        new Thread(() -> {
+            String date = new ThreadLocalUsage01().date(1000);
+            System.out.println(date);
         }).start();
     }
 

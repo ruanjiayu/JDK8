@@ -18,15 +18,12 @@ public class ThreadLocalUsage02 {
     public static ExecutorService THREAD_POOL = new ThreadPoolExecutor(10, 15, 1000L, TimeUnit.SECONDS, new ArrayBlockingQueue(1024), Executors.defaultThreadFactory(),new ThreadPoolExecutor.DiscardPolicy());
     static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         for (int i = 0; i < 1000; i++) {
             int finalI = i;
-            THREAD_POOL.submit(new Runnable() {
-                @Override
-                public void run() {
-                    String date = new ThreadLocalUsage02().date(finalI);
-                    System.out.println(date);
-                }
+            THREAD_POOL.submit(() -> {
+                String date = new ThreadLocalUsage02().date(finalI);
+                System.out.println(date);
             });
         }
         // 关闭线程池，此种关闭方式不再接受新的任务提交，等待现有队列中的任务全部执行完毕之后关闭
