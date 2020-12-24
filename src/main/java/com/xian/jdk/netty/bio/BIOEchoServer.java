@@ -32,7 +32,7 @@ public class BIOEchoServer {
                     BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                     String msg;
                     while ((msg = reader.readLine()) != null) {
-                        System.out.println("receive msg: " + msg);
+                        System.out.println(Thread.currentThread().getName() + "receive msg: " + msg);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
