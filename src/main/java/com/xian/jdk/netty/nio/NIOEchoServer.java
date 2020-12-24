@@ -49,7 +49,7 @@ public class NIOEchoServer {
                     // 强制转换为ServerSocketChannel
                     ServerSocketChannel ssc = (ServerSocketChannel) selectionKey.channel();
                     SocketChannel socketChannel = ssc.accept();
-                    System.out.println("accept new conn: " + socketChannel.getRemoteAddress());
+                    System.out.println(Thread.currentThread().getName() + "accept new conn: " + socketChannel.getRemoteAddress());
                     socketChannel.configureBlocking(false);
                     // 将SocketChannel注册到Selector上，并注册读事件
                     socketChannel.register(selector, SelectionKey.OP_READ);
@@ -69,7 +69,7 @@ public class NIOEchoServer {
 
                         // 换行符会跟着消息一起传过来
                         String content = new String(bytes, "UTF-8").replace("\r\n", "");
-                        System.out.println("receive msg: " + content);
+                        System.out.println(Thread.currentThread().getName() + "receive msg: " + content);
                     }
                 }
                 iterator.remove();
