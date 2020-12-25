@@ -40,7 +40,7 @@ public class ChatServer {
                 if (selectionKey.isAcceptable()) {
                     ServerSocketChannel ssc = (ServerSocketChannel) selectionKey.channel();
                     SocketChannel socketChannel = ssc.accept();
-                    System.out.println("accept new conn: " + socketChannel.getRemoteAddress());
+                    System.out.println(Thread.currentThread().getName() + "accept new conn: " + socketChannel.getRemoteAddress());
                     socketChannel.configureBlocking(false);
                     socketChannel.register(selector, SelectionKey.OP_READ);
                     // 加入群聊
@@ -132,6 +132,7 @@ public class ChatServer {
          */
         private static void send(SocketChannel socketChannel, String msg) {
             try {
+                msg = Thread.currentThread().getName() + msg;
                 ByteBuffer writeBuffer = ByteBuffer.allocate(1024);
                 writeBuffer.put(msg.getBytes());
                 writeBuffer.flip();

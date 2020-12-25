@@ -9,7 +9,7 @@ import java.nio.channels.CompletionHandler;
 import java.util.concurrent.Future;
 
 /**
- * @Description:
+ * @Description: 进行异步编程。但是当客户端退出的时候，会一直输出Thread-5持续接收消息中
  * @Author: Summer
  * @DateTime: 2020/12/24 8:35 下午
  * @Version: 0.0.1-SNAPSHOT
@@ -27,12 +27,13 @@ public class AIOEchoServer {
             @Override
             public void completed(AsynchronousSocketChannel socketChannel, Object attachment) {
                 try {
-                    System.out.println("accept new conn: " + socketChannel.getRemoteAddress());
+                    System.out.println(Thread.currentThread().getName() + "accept new conn: " + socketChannel.getRemoteAddress());
                     // 再次监听accept事件
                     serverSocketChannel.accept(null, this);
-
+                    System.out.println(Thread.currentThread().getName() + "消息处理");
                     // 消息的处理
                     while (true) {
+                        System.out.println(Thread.currentThread().getName() + "持续接收消息中");
                         ByteBuffer buffer = ByteBuffer.allocate(1024);
                         // 将数据读入到buffer中
                         Future<Integer> future = socketChannel.read(buffer);
@@ -47,7 +48,7 @@ public class AIOEchoServer {
                             if (content.equals("\r\n")) {
                                 continue;
                             }
-                            System.out.println("receive msg: " + content);
+                            System.out.println(Thread.currentThread().getName() + "receive msg: " + content);
                         }
                     }
                 } catch (Exception e) {
