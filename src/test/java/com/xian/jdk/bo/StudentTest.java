@@ -3,6 +3,9 @@ package com.xian.jdk.bo;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -36,6 +39,8 @@ public class StudentTest {
         students.add(s2);
         students.add(s3);
         students.add(s4);
+        students = students.stream().filter(s -> "浙江".equals(s.getAddress())).collect(Collectors.toList());
+        students.forEach(System.out::println);
         List<Student> streamStudents = students.stream().filter(s -> "浙江".equals(s.getAddress())).collect(Collectors.toList());
         streamStudents.forEach(System.out::println);
 //       foreach有两种方式一种是stream的，一种是 iterable的
@@ -119,12 +124,13 @@ public class StudentTest {
         // 提示不能进行比较，需要对compare的方法进行重新编写
 //        students.stream().sorted().forEach(System.out::println);
         //对对象的ID进行正常的排序
-//        students.stream().sorted((stu1, stu2) -> Long.compare(stu1.getId(), stu2.getId())).forEach(System.out::println);
+        students.stream().sorted(Comparator.comparingLong(Student::getId)).forEach(System.out::println);
 //        students.stream().sorted(Comparator.comparingLong(Student::getId)).forEach(System.out::println);
         students.stream()
 //                .sorted((stu1, stu2) -> Long.compare(stu2.getId(), stu1.getId())) 逆序排序
-                .sorted(Comparator.comparingLong(Student::getId).reversed().thenComparingInt(Student::getAge))
+//                .sorted(Comparator.comparingLong(Student::getId).reversed().thenComparingInt(Student::getAge)) id 从大到小，年纪从小到大排序
 //                .sorted(Comparator.comparing(stu -> new BigDecimal(stu.getDistance())))
+                .sorted(Comparator.comparing(Student::getId, Comparator.reverseOrder()).thenComparing(Student::getAge, Comparator.reverseOrder()))
                 .map(s -> {
                     s.setAddress("地址" + s.getAddress());
                 return s;}).collect(Collectors.toList())
