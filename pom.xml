@@ -16,8 +16,9 @@
     <packaging>pom</packaging>
 
     <properties>
-      <guava.google>30.0-jre</guava.google>
-      <fastjson.alibaba>1.2.72</fastjson.alibaba>
+      <guava.google.version>30.0-jre</guava.google.version>
+      <fastjson.alibaba.version>1.2.72</fastjson.alibaba.version>
+      <transmittable-thread-local.alibaba.version>2.12.2</transmittable-thread-local.alibaba.version>
     </properties>
 
     <dependencies>
@@ -55,12 +56,17 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>${guava.google}</version>
+            <version>${guava.google.version}</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>${fastjson.alibaba}</version>
+            <version>${fastjson.alibaba.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>transmittable-thread-local</artifactId>
+            <version>${transmittable-thread-local.alibaba.version}</version>
         </dependency>
     </dependencies>
 

@@ -72,5 +72,13 @@ public class InheritableThreadLocal09<T> extends InheritableThreadLocal<T>{
         public void setAge(Integer age) {
             this.age = age;
         }
+
+        @Override
+        public String toString() {
+            return "Stu{" +
+                    "name='" + name + '\'' +
+                    ", age=" + age +
+                    '}';
+        }
     }
 }
