@@ -12,11 +12,19 @@ import java.util.regex.Pattern;
 public class Test {
 
     public static void main(String[] args) {
-        String str = "hello";
-        String regex = "hello";
+        String str = "24480408949-D-11";
+        String regex = "[\\w-,]+";
         Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(str);
-        System.out.println("find() -> " + matcher.find());
-        System.out.println("find() -> " + matcher.find());
+        System.out.println(Pattern.matches(regex, str));
+//        Matcher matcher = pattern.matcher(str);
+//        if (matcher.find()) {
+//            System.out.println(matcher.group());
+//            System.out.println(matcher.group(1));
+//            System.out.println(matcher.group(2));
+//            System.out.println(matcher.groupCount());
+//            System.out.println(matcher.group(matcher.groupCount()));
+//        }
+//        System.out.println("find() -> " + matcher.find());
+//        System.out.println("find() -> " + matcher.find());
     }
 }
