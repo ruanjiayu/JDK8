@@ -71,6 +71,7 @@ public class TimeTest {
         System.out.println("分:"+now.getMinute());
         System.out.println("秒:"+now.getSecond());
         System.out.println("该日期是该年的第"+now.getDayOfYear()+"天");
+        System.out.println("今天是周" + now.getDayOfWeek().getValue());
     }
 
 
