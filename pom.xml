@@ -13,12 +13,13 @@
     <groupId>com.fun.uncle</groupId>
     <artifactId>hello23-design-pattern</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <properties>
       <guava.google.version>30.0-jre</guava.google.version>
       <fastjson.alibaba.version>1.2.72</fastjson.alibaba.version>
       <transmittable-thread-local.alibaba.version>2.12.2</transmittable-thread-local.alibaba.version>
+      <dubbo.apache.version>2.7.16</dubbo.apache.version>
     </properties>
 
     <dependencies>
@@ -68,7 +69,30 @@
             <artifactId>transmittable-thread-local</artifactId>
             <version>${transmittable-thread-local.alibaba.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo</artifactId>
+            <version>${dubbo.apache.version}</version>
+        </dependency>
+
     </dependencies>
+
+<!--    <build>-->
+<!--        <resources>-->
+<!--            <resource>-->
+<!--                <directory>src/main/java</directory>-->
+<!--                <includes>-->
+<!--                    <include>**/*.*</include>-->
+<!--                </includes>-->
+<!--            </resource>-->
+<!--            <resource>-->
+<!--                <directory>src/main/resources</directory>-->
+<!--                <includes>-->
+<!--                    <include>**/*.*</include>-->
+<!--                </includes>-->
+<!--            </resource>-->
+<!--        </resources>-->
+<!--    </build>-->
 
 
 </project>

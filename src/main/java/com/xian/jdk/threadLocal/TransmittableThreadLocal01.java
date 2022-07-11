@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 public class TransmittableThreadLocal01 {
 
     public static ThreadLocal<Integer> threadLocal = new TransmittableThreadLocal<>();
-    public static ExecutorService executorService = TtlExecutors.getTtlExecutorService(Executors.newFixedThreadPool(1));
+    public static ExecutorService executorService = TtlExecutors.getTtlExecutorService(Executors.newFixedThreadPool(2));
 
     public static void main(String[] args) throws InterruptedException {
         System.out.println("主线程开启");
@@ -26,7 +26,10 @@ public class TransmittableThreadLocal01 {
 
         executorService.submit(() -> {
             // 1
-            System.out.println("子线程读取本地变量：" + threadLocal.get());
+        do {
+            System.out.println("初始化子线程读取本地变量：" + threadLocal.get());
+            TimeUnit.SECONDS.sleep(3);
+        }while(true);
         });
 
         TimeUnit.SECONDS.sleep(1);
