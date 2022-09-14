@@ -20,6 +20,7 @@
       <fastjson.alibaba.version>1.2.72</fastjson.alibaba.version>
       <transmittable-thread-local.alibaba.version>2.12.2</transmittable-thread-local.alibaba.version>
       <dubbo.apache.version>2.7.16</dubbo.apache.version>
+      <jsoup.version>1.12.1</jsoup.version>
     </properties>
 
     <dependencies>
@@ -73,6 +74,20 @@
             <groupId>org.apache.dubbo</groupId>
             <artifactId>dubbo</artifactId>
             <version>${dubbo.apache.version}</version>
+        </dependency>
+
+        <!-- JSOUP 解析-->
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>${jsoup.version}</version>
+        </dependency>
+
+        <!--中文转英文-->
+        <dependency>
+            <groupId>com.github.promeg</groupId>
+            <artifactId>tinypinyin</artifactId>
+            <version>2.0.3</version>
         </dependency>
 
     </dependencies>

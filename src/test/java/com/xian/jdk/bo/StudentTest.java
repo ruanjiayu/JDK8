@@ -1,7 +1,6 @@
 package com.xian.jdk.bo;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
 
@@ -10,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.IntSummaryStatistics;
 import java.util.List;
@@ -84,26 +84,58 @@ public class StudentTest {
      * 可以对对象进行过滤，但是需要对创建的Student对象重写了equals和hashCode()方法，否则去重是无效的。
      */
     @Test
-    public void distinctObjectTest() {
+    public void mapObjectTest() {
         Student s1 = new Student(1L, "肖战", 15, "浙江");
-        Student s2 = new Student(2L, "王一博", 15, "湖北");
-        Student s3 = new Student(3L, "杨紫", 17, "北京");
-        Student s4 = new Student(4L, "李现", 17, "浙江");
-        Student s5 = new Student(1L, "肖战", 15, "浙江");
+        Student s2 = new Student(2L, "王一博", 13, "湖北");
+        Student s3 = new Student(3L, "杨紫", 50, "北京");
+        Student s4 = new Student(4L, "李现", 30, "浙江");
+        Student s5 = new Student(5L, "肖战", 16, "浙江");
+        Student s6 = new Student(6L, "肖战", 16, "北京");
         List<Student> students = new ArrayList<>();
         students.add(s1);
         students.add(s2);
         students.add(s3);
         students.add(s4);
         students.add(s5);
+        students.add(s6);
+
+        System.out.println(students.stream().sorted(Comparator.comparing(Student::getAge).reversed()).collect(Collectors.toList()));
+
+        students.stream().collect(Collectors.toMap(Student::getNameAddress, a -> a, (o1, o2) -> {
+            o1.setAge(o1.getAge() + o2.getAge());
+            return o1;
+        })).values().stream().forEach(System.out::println);
+
+    }
+
+    /**
+     * 可以对对象进行过滤，但是需要对创建的Student对象重写了equals和hashCode()方法，否则去重是无效的。
+     */
+    @Test
+    public void distinctObjectTest() {
+        Student s1 = new Student(1L, "肖战", 15, "浙江");
+        Student s2 = new Student(2L, "王一博", 15, "湖北");
+        Student s3 = new Student(3L, "杨紫", 17, "北京");
+        Student s4 = new Student(4L, "李现", 17, "浙江");
+        Student s5 = new Student(5L, "肖战", 16, "浙江");
+        Student s6 = new Student(6L, "肖战", 16, "北京");
+        List<Student> students = new ArrayList<>();
+        students.add(s1);
+        students.add(s2);
+        students.add(s3);
+        students.add(s4);
+        students.add(s5);
+        students.add(s6);
 //        students.stream().distinct().forEach(System.out::println);
 
-        List<String> names = students.stream().map(Student::getName).collect(Collectors.toList());
-        List<String> varNames = names;
-
-        varNames.add("haha");
-        System.out.println(varNames);
-        System.out.println(names);
+        students.stream().collect(Collectors.toMap(Student::getNameAddress, a -> a, (o1, o2) -> {
+            o1.setAge(o1.getAge() + o2.getAge());
+            return o1;
+        })).values().stream().forEach(System.out::println);
+//        List<String> varNames = names;
+//
+//        varNames.add("haha");
+//        System.out.println(varNames);
 
     }
 
@@ -146,7 +178,8 @@ public class StudentTest {
                 .sorted(Comparator.comparing(Student::getId, Comparator.reverseOrder()).thenComparing(Student::getAge, Comparator.reverseOrder()))
                 .map(s -> {
                     s.setAddress("地址" + s.getAddress());
-                return s;}).collect(Collectors.toList())
+                    return s;
+                }).collect(Collectors.toList())
 //                .sorted(Comparator.comparingInt(Student::getAge))
                 .forEach(System.out::println);
     }
@@ -357,7 +390,7 @@ public class StudentTest {
 //        links.add(502017998);
         for (int i = 3000; i < 3050; i++) {
 //            links.add(i);
-            List<Integer> links  = new ArrayList<>();
+            List<Integer> links = new ArrayList<>();
             links.add(1);
             links.add(502018017);
             links.add(i);
@@ -366,10 +399,19 @@ public class StudentTest {
     }
 
     @Test
+    public void foreachTest() {
+        HashMap<Object, Object> hashMap = new HashMap<>();
+        hashMap.forEach((key, value) -> {
+            System.out.println(key + "" + value);
+        });
+    }
+
+    @Test
     public void infoTest() {
-        String strFormat = "INSERT INTO `user_footmarks`(`parent_id`, `user_id`, `nickname`, `head_pic`, `level_expire_time`, `business_data`) VALUES (501727659, %s, '%s', 'picUrl', '2022-04-30 15:51:07', '{\"id\":\"123\",\"title\":\"t_item.item_title\",\"picUrl\":\"t_item.default_pic_url\",\"salePrice\":\"1000\",\"placeOrder\":\"true\"},{\"id\":\"234\",\"title\":\"t_item.item_title\",\"picUrl\":\"t_item.default_pic_url\",\"salePrice\":\"20000\",\"placeOrder\":\"true\"}');";
-        for (int i = 30; i < 60; i++) {
-            System.out.println(String.format(strFormat, i, "智峰" + i));
+        String strFormat = "INSERT INTO `online_user_num_statistics` (`archive_date`, `user_data`) VALUES('%s','{\"total\":%s,\"active\":%s,\"newUser\":%s,\"register\":%s,\"tourist\":%s}');";
+        for (int i = 1; i < 3000; i++) {
+            LocalDateTime startTime = LocalDateTime.of(2022, 8, 1, 0, 0);
+            System.out.println(String.format(strFormat, startTime.plusMinutes(15 * i), i, 2 * i, 3 * i, 4 * i, 5 * i));
         }
     }
 
@@ -391,6 +433,7 @@ public class StudentTest {
         System.out.println(Runtime.getRuntime().totalMemory() * 1.0 / 1024 / 1024);
     }
 
+
     public static void main(String[] args) {
 //        System.out.println(Runtime.getRuntime().maxMemory() * 1.0 / 1024 / 1024);
 //        System.out.println(Runtime.getRuntime().totalMemory() * 1.0 / 1024 / 1024);
@@ -401,9 +444,6 @@ public class StudentTest {
 
         System.out.println(set.contains(1100));
     }
-
-
-
 
 
 }

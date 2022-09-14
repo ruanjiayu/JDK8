@@ -31,6 +31,7 @@ public class Student {
 
     /**
      * 来获取student的集合数据
+     *
      * @return
      */
     public static List<Student> findStudents() {
@@ -101,6 +102,10 @@ public class Student {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, age, address);
+    }
+
+    public String getNameAddress() {
+        return name + "_" + address;
     }
 
     public Long getId() {
