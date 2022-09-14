@@ -3,7 +3,7 @@ package com.xian.jdk.balance;
 import java.util.List;
 
 /**
- * @Description:
+ * @Description: 循环算法
  * @Author: summer
  * @CreateDate: 2022/9/14 11:25
  * @Version: 1.0.0
