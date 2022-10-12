@@ -21,7 +21,8 @@
         <transmittable-thread-local.alibaba.version>2.12.2</transmittable-thread-local.alibaba.version>
         <dubbo.apache.version>2.7.16</dubbo.apache.version>
         <jsoup.version>1.12.1</jsoup.version>
-        <hutool.version>5.7.10</hutool.version>
+        <hutool.version>5.8.8</hutool.version>
+        <pinyin4j.version>2.5.1</pinyin4j.version>
     </properties>
 
     <dependencies>
@@ -85,6 +86,11 @@
         </dependency>
 
         <!--中文转英文-->
+        <dependency>
+            <groupId>com.belerweb</groupId>
+            <artifactId>pinyin4j</artifactId>
+            <version>${pinyin4j.version}</version>
+        </dependency>
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>

@@ -9,27 +9,29 @@ import java.util.regex.Pattern;
 
 /**
  * 实现中文转拼音
+ *
  * @author ruanjiayu
  */
 public class LanguageConvertUtil {
 
     /**
-     *  获取汉字的拼音首字母
-     * @param src  汉字字符串
+     * 获取汉字的拼音首字母
+     *
+     * @param src 汉字字符串
      * @return
      */
     public static String resolveFirstCharacter(String src) {
         Assert.notNull(src, "参数[src]不能为空");
-
-        String c = ((PinyinUtil.isChinese(src.charAt(0)) ? PinyinUtil.getPinyin(src.charAt(0)) : src) // 中文就将首字转成拼音
-                // .substring(0, 1)
-        )
-                .toUpperCase(Locale.ROOT);
+        // 中文就将首字转成拼音
+        String c = ((PinyinUtil.isChinese(src.charAt(0)) ? PinyinUtil.getPinyin(src.charAt(0)) : src)
+//                 .substring(0, 1)
+        ).toUpperCase(Locale.ROOT);
         return containsLetter(c) ? c : "#";
     }
 
     /**
      * 是否包含字母
+     *
      * @param str
      * @return
      */
@@ -42,6 +44,12 @@ public class LanguageConvertUtil {
 
 
     public static void main(String[] args) {
-        System.out.println(resolveFirstCharacter("李佳裕"));
+        System.out.println(resolveFirstCharacter("阮佳裕"));
+        System.out.println(resolveFirstCharacter("1佳裕"));
+        System.out.println(resolveFirstCharacter("dasf佳裕"));
+        System.out.println(resolveFirstCharacter("🐷⚽️哈哈"));
+        System.out.println(resolveFirstCharacter("7⃣️ℹ️大城市"));
+        System.out.println(resolveFirstCharacter("🌧️大城市"));
+        System.out.println(resolveFirstCharacter("🎺大城市"));
     }
 }
