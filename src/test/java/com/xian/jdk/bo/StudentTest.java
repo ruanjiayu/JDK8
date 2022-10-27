@@ -10,11 +10,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -433,16 +432,34 @@ public class StudentTest {
         System.out.println(Runtime.getRuntime().totalMemory() * 1.0 / 1024 / 1024);
     }
 
+    /**
+     * 合并list中相同名字的年龄
+     */
+    @Test
+    public void merge() {
+        List<Student> students = new ArrayList<>();
+        ArrayList<Student> list = new ArrayList<>(students.stream().collect(Collectors.toMap(Student::getName,
+                v -> v,
+                (r1, r2) -> {
+                    r1.setAge(r1.getAge() + r2.getAge());
+                    return r1;
+                })).values());
+    }
+
 
     public static void main(String[] args) {
 //        System.out.println(Runtime.getRuntime().maxMemory() * 1.0 / 1024 / 1024);
 //        System.out.println(Runtime.getRuntime().totalMemory() * 1.0 / 1024 / 1024);
 //
 //        System.out.println(new BigDecimal("11.49999999").setScale(0, BigDecimal.ROUND_HALF_UP).longValue());
-        Set<Integer> set = new HashSet<>();
-        set.add(new Integer(1100));
+//        Set<Integer> set = new HashSet<>();
+//        set.add(new Integer(1100));
+//
+//        System.out.println(set.contains(1100));
 
-        System.out.println(set.contains(1100));
+        ArrayList<Student> list = new ArrayList<>();
+        Map<Long, Student> map = list.stream().collect(Collectors.toMap(Student::getId, Function.identity()));
+        System.out.println(map);
     }
 
 

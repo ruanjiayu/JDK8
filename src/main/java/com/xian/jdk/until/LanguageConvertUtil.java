@@ -44,12 +44,15 @@ public class LanguageConvertUtil {
 
 
     public static void main(String[] args) {
-        System.out.println(resolveFirstCharacter("阮佳裕"));
-        System.out.println(resolveFirstCharacter("1佳裕"));
-        System.out.println(resolveFirstCharacter("dasf佳裕"));
-        System.out.println(resolveFirstCharacter("🐷⚽️哈哈"));
-        System.out.println(resolveFirstCharacter("7⃣️ℹ️大城市"));
-        System.out.println(resolveFirstCharacter("🌧️大城市"));
-        System.out.println(resolveFirstCharacter("🎺大城市"));
+//        System.out.println(resolveFirstCharacter("阮佳裕"));
+//        System.out.println(resolveFirstCharacter("1佳裕"));
+//        System.out.println(resolveFirstCharacter("dasf佳裕"));
+//        System.out.println(resolveFirstCharacter("🐷⚽️哈哈"));
+//        System.out.println(resolveFirstCharacter("7⃣️ℹ️大城市"));
+//        System.out.println(resolveFirstCharacter("🌧️大城市"));
+//        System.out.println(resolveFirstCharacter("🎺大城市"));
+
+        System.out.println("https://publicduoguan.oss-cn-hangzhou.aliyuncs.com/app/user/icon/10000303/100003031665301177666.jpg"
+                .replaceFirst("publicduoguan.oss-cn-hangzhou.aliyuncs.com", "publicduoguan.oss.duoguan.cc"));
     }
 }

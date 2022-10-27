@@ -2,7 +2,14 @@ package com.xian.jdk.bo;
 
 import org.junit.Test;
 
-import java.time.*;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.MonthDay;
+import java.time.Period;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjusters;
@@ -152,7 +159,7 @@ public class TimeTest {
     @Test
     public void timeInterval() {
         LocalDate today = LocalDate.now();
-        LocalDate specifyDate = LocalDate.of(2021, 4, 14);
+        LocalDate specifyDate = LocalDate.of(2022, 10, 25);
         Period period = Period.between(specifyDate, today);
 
         //4 这里的数字仅仅表示指定的第几号 + 几天就等于现在的几号
