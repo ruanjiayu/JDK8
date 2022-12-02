@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,6 +14,7 @@ import java.util.HashMap;
 import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -375,8 +377,12 @@ public class StudentTest {
         students.add(s2);
         students.add(s3);
         students.add(s4);
-        Map<Integer, List<Student>> collect = students.stream().collect(Collectors.groupingBy(Student::getAge));
+        Map<Boolean, List<Student>> collect = students.stream().collect(Collectors.groupingBy(e -> Objects.equals(e.getAge(), 17)));
         System.out.println(collect);
+        List<Student> studentList = collect.get(true);
+        studentList.addAll(new ArrayList<>());
+        System.out.println(studentList);
+
     }
 
 
@@ -462,6 +468,12 @@ public class StudentTest {
         System.out.println(map);
     }
 
+    @Test
+    public void jsonTest() {
+        System.out.println(2 * 1.0 / 100);
+        System.out.println(BigDecimal.valueOf(11).divide(BigDecimal.valueOf(4), 2, BigDecimal.ROUND_HALF_UP).toString());
+        System.out.println(JSON.toJSONString(Student.createStudent()));
+    }
 
 }
 

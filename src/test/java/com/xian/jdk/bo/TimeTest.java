@@ -159,7 +159,7 @@ public class TimeTest {
     @Test
     public void timeInterval() {
         LocalDate today = LocalDate.now();
-        LocalDate specifyDate = LocalDate.of(2022, 10, 25);
+        LocalDate specifyDate = LocalDate.of(2022, 10, 28);
         Period period = Period.between(specifyDate, today);
 
         //4 这里的数字仅仅表示指定的第几号 + 几天就等于现在的几号
@@ -242,5 +242,6 @@ public class TimeTest {
         LocalTime time = LocalTime.of(8, 0, 0);
         LocalDateTime localDateTime = LocalDateTime.of(localDate, time);
         System.out.println(localDateTime);
+        System.out.println(LocalDateTime.parse("2022-11-29T11:00:00"));
     }
 }
