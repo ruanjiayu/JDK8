@@ -5,6 +5,8 @@ import org.assertj.core.util.Lists;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -473,6 +475,27 @@ public class StudentTest {
         System.out.println(2 * 1.0 / 100);
         System.out.println(BigDecimal.valueOf(11).divide(BigDecimal.valueOf(4), 2, BigDecimal.ROUND_HALF_UP).toString());
         System.out.println(JSON.toJSONString(Student.createStudent()));
+    }
+
+    @Test
+    public void mapCloneTest() {
+        HashMap<Object, Object> initMap = new HashMap<>();
+        Student student = new Student();
+        student.setName("111");
+        initMap.put("haha", student);
+        HashMap<Object, Object> cloneMap = (HashMap<Object, Object>) initMap.clone();
+        cloneMap.remove("haha");
+        Student student2 = new Student();
+        student2.setName("2222");
+        cloneMap.put("haha", student2);
+        System.out.println(JSON.toJSONString(initMap));
+        System.out.println(JSON.toJSONString(cloneMap));
+        System.out.println( System.currentTimeMillis());
+
+        BigDecimal divide = BigDecimal.valueOf(120).divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP);
+        DecimalFormat decimalFormat = new DecimalFormat("#0.00");
+
+        System.out.println(decimalFormat.format(divide));
     }
 
 }

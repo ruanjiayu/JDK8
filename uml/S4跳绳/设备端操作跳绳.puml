@@ -1,0 +1,13 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+
+participant 设备 as firmware
+participant 服务器 as server
+
+firmware -> firmware : 开始跳绳,一次跳绳仅一个训练ID
+firmware -> server: 上报数据(每条数据携带上述训练ID)
+server -> server: 数据处理(数据转换成json、数据归档、判断结束标志位、判断抢跳等)
+@enduml

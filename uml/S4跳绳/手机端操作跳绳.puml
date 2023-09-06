@@ -1,0 +1,18 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+participant 手机 as phone
+participant 服务器 as server
+participant 设备 as firmware
+
+phone -> phone: 点击开始训练，生成训练ID(时间 + 用户ID)
+phone -> server: 将训练ID传递
+server -> firmware: 训练ID传递(MQTT)
+firmware -> firmware : 开始跳绳
+firmware -> server: 上报数据(每条数据携带上训练ID)
+server -> server: 数据处理(数据转换成json、数据归档、判断结束标志位、判断抢跳等)
+server -> phone: 将上报的数据实时推送给手机端
+
+@enduml

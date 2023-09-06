@@ -1,0 +1,19 @@
+//使用 proto3 语法 ,未指定则使用proto2
+syntax = "proto3";
+
+//生成 proto 文件所在包路径
+package com.xian.jdk.proto;
+
+//生成 proto 文件所在包路径
+option java_package = "com.xian.jdk.proto";
+
+//生成 proto 文件名
+option java_outer_classname="ActionDataV2Proto";
+
+message ActionDataV2{
+
+    string type = 1;
+
+    int32 cd = 2;
+
+}

@@ -1,0 +1,25 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+database 数据库 as mysql
+participant 观察者服务 as watchServer
+participant redis as redis
+participant 任务服务器 as taskServer
+participant ffmpeg as ffmpeg
+
+
+
+watchServer -> mysql:获取任务状态为2并且执行时间超过1小时的任务
+watchServer -> redis: 将任务投递到redis的头部
+watchServer -> mysql: 将任务状态变更为1
+taskServer -> redis: 实时拉取任务
+taskServer -> ffmpeg: 将本次任务派送给ffmpeg
+ffmpeg -> ffmpeg: 按照规则生成对应的视频
+ffmpeg -> taskServer: 每完成一个任务就上报完成对应任务
+taskServer -> mysql: 更新任务完成
+taskServer -> taskServer: 判断对应动作的视频所有任务是否完成
+taskServer --> mysql: 全部完成则对本动作打标
+
+@enduml

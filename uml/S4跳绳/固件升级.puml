@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+participant 设备 as firmware
+participant 服务器 as server
+
+firmware -> firmware: 设备开机
+firmware -> server: 上报我已经在线的信号(MQTT)
+server -> firmware: 获取设备信息(MQTT)
+firmware -> server: 返回设备信息(MQTT)
+server -> server: 判断当前电量是否大于20%
+server -> server: 判断当前设备版本和库里版本的大小(强提示升级)
+server -> firmware: 发送设备升级提示指令(链接地址 + CRC32)
+firmware -> server: 拉对应升级包
+firmware -> firmware: 校验升级包的CRC32
+firmware -> firmware: 播报升级成功
+@enduml

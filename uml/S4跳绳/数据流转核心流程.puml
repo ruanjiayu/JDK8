@@ -1,0 +1,20 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+participant 设备 as firmware
+participant 服务器 as server
+participant redis as redis
+participant 消息队列 as rocketMQ
+
+firmware --> server: 上报数据(每条数据携带上训练ID)
+server -> server: 数据处理(数据转换成json、判断结束标志位、判断抢跳等)
+server -> phone: 将上报的数据实时推送给手机端
+server -> redis: 将数据放入list数据结构
+firmware --> server: 发送结束位标志跳绳数据
+server -> redis: 将数据取出从list中读取
+server -> server: 对整体跳绳数据进行加工、归档、入库
+server -> rocketMQ: 发送归档后的数据ID、数据类型，给后续的业务使用
+
+@enduml

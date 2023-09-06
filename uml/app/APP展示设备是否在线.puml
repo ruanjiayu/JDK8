@@ -1,0 +1,18 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor 用户 as user
+participant 网关 as gateway
+participant redis as redis
+database 数据库 as mysql
+participant 服务器 as sever
+
+user -> gateway: APP上的相关操作
+gateway -> redis: 设置用户在线标识位
+gateway -> mysql: 记录用户的操作时间
+gateway -> sever: 路由到请求的服务服务
+sever -> gateway: 数据响应
+gateway -> user:数据响应
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+
+participant 设备 as firmware
+participant 服务器 as server
+participant 手机 as phone
+
+
+firmware -> firmware: 开启蓝牙，并广播
+phone -> firmware: 发现对应设备，从广播中获取设备信息(mac、版本信息等)
+phone -> server: 将设备信息传递
+server -> server: 用户和设备进行绑定
+server -> firmware: 发送设备关闭蓝牙指令(MQTT)
+firmware -> firmware: 关闭蓝牙
+
+@enduml

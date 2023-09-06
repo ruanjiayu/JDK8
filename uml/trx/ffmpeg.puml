@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor 用户 as user
+participant 服务器 as server
+participant redis as redis
+database 数据库 as mysql
+participant 任务服务器 as taskServer
+participant ffmpeg as ffmpeg
+
+
+user -> server: 上传视频
+server -> server: 按照指定的规则生成对应任务
+server -> mysql: 将任务入库(course_action_video)
+server -> redis: 将任务放入
+taskServer -> redis: 实时拉取任务
+taskServer -> ffmpeg: 将本次任务派送给ffmpeg
+ffmpeg -> ffmpeg: 按照规则生成对应的视频
+ffmpeg -> taskServer: 每完成一个任务就上报完成对应任务
+taskServer -> mysql: 更新任务完成
+taskServer -> taskServer: 判断对应动作的视频所有任务是否完成
+taskServer --> mysql: 全部完成则对本动作打标
+
+@enduml

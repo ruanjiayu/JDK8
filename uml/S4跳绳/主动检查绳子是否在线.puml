@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+
+participant 用户 as user
+participant 平台 as server
+participant 设备 as firmware
+
+user -> server : 点击按钮检查绳子状态
+server -> server : 查询当前赛事项目下的所有绳子
+server -> server : 将当前这批绳子上下状态变为`检测中`
+server -> firmware: 对这批设备发送`获取设备信息`指令
+firmware -> server: 设备陆续返回信息
+server -> server: 将对应绳子状态置为上线
+server -> server: 超过一定时间没返回的(如10秒)，表示绳子已下线
+
+@enduml

@@ -1,0 +1,31 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+participant 手机 as phone
+participant 设备 as firmware
+participant 服务器 as server
+
+firmware -> firmware: 开启热点WI-FI。
+
+phone -> firmware: 系统设置中找到对应的热点WI-FI进行连接。
+
+phone -> phone: 客户端弹出一个输入Wi-Fi页面
+
+phone -> firmware: 输入家里可上网的Wi-Fi登陆信息,并传输用户信息
+
+firmware -> firmware: 尝试连接输入的Wi-Fi登陆信息
+
+phone -> firmware: 查询设备是否上网成功
+
+firmware -> server: 将设备信息和用户信息传递给服务器来进行设备绑定(MQTT)
+
+firmware --> firmware: 2分钟后设备AP关闭
+
+server -> firmware: 获取设备基础信息(MQTT)
+
+firmware -> server: 返回设备信息(MQTT)
+
+server -> phone: 返回连接成功标志(一旦获取到设备基础信息)
+@enduml

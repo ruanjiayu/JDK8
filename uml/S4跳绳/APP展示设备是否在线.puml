@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+participant 手机 as phone
+participant 服务器 as server
+participant 设备 as firmware
+
+phone -> server: 发送查询设备在线请求
+server -> firmware: 发送获取设备信息指令(MQTT)
+firmware -> server: 返回设备信息(MQTT)
+server -> phone: 设备在线信号返回
+@enduml

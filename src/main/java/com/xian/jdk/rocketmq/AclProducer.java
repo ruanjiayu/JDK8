@@ -23,6 +23,8 @@ public class AclProducer {
 
         // topic 和body
         Message msg = new Message("test", "阮佳裕".getBytes(StandardCharsets.UTF_8));
+        msg.setDelayTimeLevel(0);
+        msg.putUserProperty("DELAY_TIME", "");
         SendResult send = producer.send(msg);
 
         // 关闭生产者
